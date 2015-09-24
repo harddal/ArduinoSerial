@@ -1,0 +1,1 @@
+A command line program to read serial data from an Arduino.
