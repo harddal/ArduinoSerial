@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 	bool quietMode = false, fileOutMode = false, timeOut = false, newLineMode = false, loopDelay;
 	char data[256] = "";
 	char *port = "", *input = "", *filename = "";
-	int length = 1, exeTime = 0, delayTime = 0;
+	int length = 1, exeTime = 0, delayTime = 0, bytesRecieved = 0;
 	
 
 	if (argc < 2)
@@ -93,6 +93,9 @@ int main(int argc, char *argv[])
 	while (SP->IsConnected())
 	{
 		int r = SP->ReadData(data, length);
+		
+		if (r > 0)
+			bytesRecieved += r;
 
 		if (r > 0 && !quietMode)
 			newLineMode ? printf("    %s\n", data) : printf("%s", data);
@@ -113,14 +116,10 @@ int main(int argc, char *argv[])
 	f_out.close();
 
 	if (timeOut)
-	{
-		exeTime > 1 ? 
-			std::cout << "Read serial data for " << exeTime << " seconds\n": 
-			std::cout << "Read serial data for " << exeTime << " second \n";
+		std::cout << "Received " << bytesRecieved << (bytesRecieved > 1 ? " bytes" : " byte") << " of serial data for " << exeTime << (exeTime > 1 ? " seconds\n" : " second\n");
 		
-	}
 	if (fileOutMode)
-		std::cout << "Wrote serial data to file " << filename << "\n";
+		std::cout << "Wrote captured serial data to file " << filename << "\n";
 
 	std::cout << "\n";
 
