@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <thread>
 
 #include "Serial.h"
 #include "Timer.h"
@@ -14,10 +15,10 @@ int main(int argc, char *argv[])
 {
 	std::ofstream f_out;
 	
-	bool quietMode = false, fileOutMode = false, timeOut = false;
+	bool quietMode = false, fileOutMode = false, timeOut = false, newLineMode = false, loopDelay;
 	char data[256] = "";
 	char *port = "", *input = "", *filename = "";
-	int length = 256, exeTime = 0;
+	int length = 1, exeTime = 0, delayTime = 0;
 	
 
 	if (argc < 2)
@@ -60,9 +61,20 @@ int main(int argc, char *argv[])
 		exeTime = atoi(getCmdOption(argv, argv + argc, "-t"));
 	}
 
+	if (cmdOptionExists(argv, argv + argc, "-d"))
+	{
+		loopDelay = true;
+		delayTime = atoi(getCmdOption(argv, argv + argc, "-d"));
+	}
+
 	if (cmdOptionExists(argv, argv + argc, "-q"))
 	{
 		quietMode = true;
+	}
+
+	if (cmdOptionExists(argv, argv + argc, "-n"))
+	{
+		newLineMode = true;
 	}
 
 	Serial* SP = new Serial(port);
@@ -83,19 +95,30 @@ int main(int argc, char *argv[])
 		int r = SP->ReadData(data, length);
 
 		if (r > 0 && !quietMode)
-			printf("%s\n", data);
+			newLineMode ? printf("    %s\n", data) : printf("%s", data);
 
 		if (r > 0 && fileOutMode)
-			f_out << data << "\n";
+			newLineMode ? f_out << data << "\n" : f_out << data;
 
 		if (timer.Elapsed().count() > exeTime && timeOut)
+		{
+			newLineMode ? std::cout << "\n" : std::cout << "\n\n";
 			break;
+		}
+
+		if (loopDelay)
+			std::this_thread::sleep_for(std::chrono::milliseconds(delayTime));
 	}
 
 	f_out.close();
 
 	if (timeOut)
-		std::cout << "Read serial data for " << exeTime << " seconds\n";
+	{
+		exeTime > 1 ? 
+			std::cout << "Read serial data for " << exeTime << " seconds\n": 
+			std::cout << "Read serial data for " << exeTime << " second \n";
+		
+	}
 	if (fileOutMode)
 		std::cout << "Wrote serial data to file " << filename << "\n";
 
@@ -129,6 +152,8 @@ std::string programInfo()
 		" -l <size>    - Specify the maximum size in bytes of data to retrieve\n"
 		" -f <path>    - Write serial output to a file specified by <path>\n"
 		" -t <time>    - Specifies how long to capture serial data in seconds\n"
+		" -d <time>    - Specifies a millisecond delay (per loop) to capture the serial data\n"
 		" -q           - Quiet mode, serial output will not be displayed\n"
+		" -n           - Newline mode, seperate serial data by newlines\n"
 		"\n";
 }
