@@ -1,10 +1,12 @@
-A command line program to read serial data from an Arduino.
+A command line program to read serial data from an Arduino. The baud rate is set to 9600 unless you specifiy it with '-b'.
 
 Usage:
 
     -r              - Start the program in read mode
 
     -w              - Start the program in write mode
+    
+    -b <rate>       - Set the connections baud rate (defaulty 9600)
 
     -p <port>       - Specify the port to access the Arduino
 
