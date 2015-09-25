@@ -2,19 +2,29 @@ A command line program to read serial data from an Arduino.
 
 Usage:
 
-    -p <port>    - Specify the port to access the Arduino (COM1, COM2, etc.)
+    -r              - Start the program in read mode
 
-    -l <size>    - Specify the maximum size in bytes of data to retrieve
+    -w              - Start the program in write mode
 
-    -f <path>    - Write serial output to a file specified by <path>
+    -p <port>       - Specify the port to access the Arduino
 
-    -t <time>    - Specifies how long to capture serial data in seconds
+    -l <size>       - Specify the maximum size in bytes of data to read/write
 
-    -d <time>    - Specifies a millisecond delay (per loop) to capture the serial data
+    -f <path>       - Write serial output to a file specified by <path>
 
-    -q           - Quiet mode, serial output will not be displayed in the console
+    -t <time>       - Specifies how long to capture serial data in seconds
 
-    -n           - Newline mode, seperates serial data by newlines
+    -d <time>       - Specifies a millisecond delay (per loop) to capture the serial data
+
+    -data <char>    - Char data to write, must be aligned with -l (1 byte == 1 char)
+
+    -q              - Quiet mode, serial output will not be displayed
+
+    -n              - Newline mode, seperate serial data by newlines
+
+    -s              - Spam mode, sends as many bytes as possible, infinitely
+
+    -c              - Capture mode, waits until it recieves one byte of data and halts
 
 You may need to the program run as an administrator for the file ouput to work properly.
 
