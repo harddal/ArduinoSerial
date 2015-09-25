@@ -35,5 +35,5 @@ Usage:
 
 You may need to the program run as an administrator for the file ouput to work properly.
 
-Written in VS2015 using the standard templete libary and various Windows functions.
-Requires the VS2015 redist package.
+Written in VS2015 using the standard templete libary and a few Windows-specific functions and datatypes.
+Should compile and run on any windows target. Requires the VS2015 redist package.
