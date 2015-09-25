@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 
 	int length = 1, exeTime = 0, 
 		delayTime = 0, bytesRecieved = 0, 
-		bytesTransmitted = 0;
+		bytesTransmitted = 0, baudRate = 9600;
 	
 
 	if (argc < 2)
@@ -51,6 +51,11 @@ int main(int argc, char *argv[])
 		std::cout << "\n Read/Write mode not specified, use -r or -w\n\n";
 		return 0;
 	}
+
+	if (cmdOptionExists(argv, argv + argc, "-b"))
+		baudRate = atoi(getCmdOption(argv, argv + argc, "-b"));
+	else
+		baudRate = 9600;
 
 	if (cmdOptionExists(argv, argv + argc, "-p"))
 		port = getCmdOption(argv, argv + argc, "-p");
@@ -144,7 +149,7 @@ int main(int argc, char *argv[])
 			std::cout << "\n  Warning: -c has no effect in timeout (-t) mode\n\n";
 	}
 
-	Serial* SP = new Serial(port);
+	Serial* SP = new Serial(port, baudRate);
 
 	if (!SP->IsConnected())
 	{
@@ -255,6 +260,7 @@ std::string programInfo()
 		"\n  Arduino Serial Communication Tool - Created by Dallas Hardwicke\n\n"
 		"  -r              - Start the program in read mode\n"
 		"  -w              - Start the program in write mode\n"
+		"  -b              - Set the connections baud rate (defaulty 9600)\n"
 		"  -p <port>       - Specify the port to access the Arduino\n"
 		"  -l <size>       - Specify the maximum size in bytes of data to read/write\n"
 		"  -f <path>       - Write serial output to a file specified by <path>\n"

@@ -14,7 +14,7 @@ private:
 	DWORD errors;
 
 public:
-	Serial(char *portName);
+	Serial(char *portName, int baudrate);
 	~Serial();
 	
 	int ReadData(char *buffer, unsigned int nbChar);

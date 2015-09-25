@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 
-Serial::Serial(char *portName)
+Serial::Serial(char *portName, int baudrate)
 {
 	this->connected = false;
 
@@ -36,7 +36,7 @@ Serial::Serial(char *portName)
 		}
 		else
 		{
-			dcbSerialParams.BaudRate = 32768; // 8kb per second
+			dcbSerialParams.BaudRate = baudrate; // 8kb per second
 			dcbSerialParams.ByteSize = 8;
 			dcbSerialParams.StopBits = ONESTOPBIT;
 			dcbSerialParams.Parity = NOPARITY;
@@ -50,9 +50,6 @@ Serial::Serial(char *portName)
 			{
 				this->connected = true;
 				PurgeComm(this->hSerial, PURGE_RXCLEAR | PURGE_TXCLEAR);
-
-				// Wait for Arduino reboot
-				//std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 			}
 		}
 	}
