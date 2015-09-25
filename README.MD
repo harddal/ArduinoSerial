@@ -1,4 +1,9 @@
-A command line program to read serial data from an Arduino. The baud rate is set to 9600 unless you specifiy it with '-b'.
+A command line program to read serial data from an Arduino. 
+
+The baud rate is set to 9600 unless you specifiy it with '-b'.
+
+DTR control is defaulty disabled, so the Arduino will not reboot every time you establish a serial connection.
+If you would like to enable DTR control, set the value of 'dcbSerialParams.fDtrControl' to equal 'DTR_CONTROL_ENABLE' on line 43 of 'Serial.cpp'.
 
 Usage:
 
