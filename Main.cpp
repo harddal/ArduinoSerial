@@ -256,7 +256,7 @@ std::string programInfo()
 		"  -r              - Start the program in read mode\n"
 		"  -w              - Start the program in write mode\n"
 		"  -p <port>       - Specify the port to access the Arduino\n"
-		"  -l <size>       - Specify the maximum size in bytes of data to retrieve\n"
+		"  -l <size>       - Specify the maximum size in bytes of data to read/write\n"
 		"  -f <path>       - Write serial output to a file specified by <path>\n"
 		"  -t <time>       - Specifies how long to capture serial data in seconds\n"
 		"  -d <time>       - Specifies a millisecond delay (per loop) to capture the serial data\n"
