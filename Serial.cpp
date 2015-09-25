@@ -36,7 +36,7 @@ Serial::Serial(char *portName, int baudrate)
 		}
 		else
 		{
-			dcbSerialParams.BaudRate = baudrate; // 8kb per second
+			dcbSerialParams.BaudRate = baudrate;
 			dcbSerialParams.ByteSize = 8;
 			dcbSerialParams.StopBits = ONESTOPBIT;
 			dcbSerialParams.Parity = NOPARITY;
