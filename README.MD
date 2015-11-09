@@ -2,7 +2,7 @@ A command line program to read serial data from an Arduino.
 
 The baud rate is set to 9600 unless you specifiy it with '-b'.
 
-DTR control is defaulty disabled, so the Arduino will not reboot every time you establish a serial connection.
+DTR control is disabled by default, so the Arduino will not reboot every time you establish a serial connection.
 If you would like to enable DTR control, set the value of 'dcbSerialParams.fDtrControl' to equal 'DTR_CONTROL_ENABLE' on line 43 of 'Serial.cpp'.
 
 Usage:
@@ -36,4 +36,4 @@ Usage:
 You may need to the program run as an administrator for the file ouput to work properly.
 
 Written in VS2015 using the standard templete libary and a few Windows-specific functions and datatypes.
-Should compile and run on any windows target. Requires the VS2015 redist package.
+Should compile and run on any Windows target. Requires the VS2015 redist package.
