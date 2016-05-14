@@ -1,4 +1,4 @@
-A command line program to read serial data from an Arduino. 
+A command line program to read/write serial data from/to an Arduino. 
 
 The baud rate is set to 9600 unless you specifiy it with '-b'.
 
