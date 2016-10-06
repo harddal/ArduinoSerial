@@ -32,8 +32,3 @@ Usage:
     -s              - Spam mode, sends as many bytes as possible, infinitely
 
     -c              - Capture mode, waits until it recieves one byte of data and halts
-
-You may need to the program run as an administrator for the file ouput to work properly.
-
-Written in VS2015 using the standard templete libary and a few Windows-specific functions and datatypes.
-Should compile and run on any Windows target. Requires the VS2015 redist package.
